@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',"PostController@home");
+Route::get('/contact',"PostController@contact");
+Route::get('/post/{id}/{name}',"PostController@post");
