@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ["as"=>"name.post", function () {
+    $url=route('name.post');    
+    return view('home ');
+}]);
