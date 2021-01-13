@@ -10,5 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/admin/dashboard','admin\DashboardController@index')->name('admin.dashboard');
+Route::group(['prefix' => 'admin','namespace' => 'admin'], function () {
+    Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
+Route::resource('/category', 'CategoryController');
+});
