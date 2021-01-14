@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdminLayoutsController extends Controller
+class DashBoardController extends Controller
 {
     public function index(){
-        return view('admin.adminlayout');
+        return view('admin.dashboard');
     }
 }
