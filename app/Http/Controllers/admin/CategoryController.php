@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\admin\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories=Category::where('level',1)->get();
+        return view('admin.category.index',compact('categories'));
     }
 
     /**
@@ -26,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $categories=Category::all();
+        return view('admin.category.create',compact('categories'));
     }
 
     /**
@@ -37,7 +40,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     $category = new Category();
+     $category->name=$request->name;
+     if($request->parent==0){
+         $category->level=1;
+     }
+     else{
+         $category->level=2;
+         $category->parent_id=$request->parent;
+     }
+     $slug=$request->name;
+     $slug=strtolower($slug);
+     $slug=str_replace(" ","",$slug);
+     $category->slug=$slug;
+     $category->save();
+    if(isset($request->save)){
+    return redirect()->route('admin.category.edit',$category->id);
+    }
+    else{
+        return redirect()->route('admin.category.index');
+    }
     }
 
     /**
@@ -59,7 +81,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories=Category::all();
+        return view('admin.category.edit',compact('categories'));
     }
 
     /**

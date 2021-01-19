@@ -44,7 +44,6 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Parent Name</th>
                         <th>Name</th>
                         <th>Posts</th>
                         <th>Actions</th>
@@ -52,11 +51,25 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($categories as $key=>$category)
+                       <tr>
+                        <td>{{$key+1}}</td>
+                        <td>{{$category->name}}</td>
+                        <td><span class="badge badge-info">0</span></td>
+                        <td><div class="btn-group">
+                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
+                            <button type="button" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>
+                            
+                          </div></td>
+                          <td>
+                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                          </td>
+                      </tr>  
+                      @foreach ($category->childs as $key1=>$child)
                       <tr>
-                        <td>1</td>
-                        <td>Business</td>
-                        <td>Business</td>
-                        <td><span class="badge badge-info">234</span></td>
+                        <td class="table-left-border">{{$key1+1}}</td>
+                        <td>{{$child->name}}</td>
+                        <td><span class="badge badge-info">0</span></td>
                         <td><div class="btn-group">
                             <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
                             <button type="button" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>
@@ -66,6 +79,10 @@
                             <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
                           </td>
                       </tr>
+                      @endforeach
+     
+                      @endforeach
+                      
                     </tbody>
                   </table>
                 </div>

@@ -31,18 +31,20 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" action={{route('admin.category.store')}} method="post">
+                {{csrf_field()}}
                   <div class="card-body">
                     <div class="form-group">
                       <label for="Name">Name</label>
-                      <input type="text" class="form-control" id="Name" placeholder="Enter Name">
+                      <input type="text" name="name" class="form-control" id="Name" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
                         <label>Select Parent Category</label>
-                        <select class="form-control">
-                          <option>Select Parent Category</option>
-                          <option>option 1</option>
-                          <option>option 2</option>
+                        <select class="form-control" name="parent">
+                          <option value="0">Select Parent Category</option>
+                          @foreach ($categories as $category)
+                          <option value="{{$category->id}}">{{$category->name}}</option>
+                          @endforeach
                         </select>
                       </div>
                   <!-- /.card-body -->
