@@ -31,33 +31,20 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form" action={{route('admin.category.update',$result->id)}} method="post">
-                {{csrf_field()}}
-                {{method_field('PUT')}}
                   <div class="card-body">
                     <div class="form-group">
                       <label for="Name">Name</label>
-                      <input type="text" name="name" value="{{$result->name}}" class="form-control" id="Name" placeholder="Enter Name">
+                      <input disabled type="text" name="name" value="{{$result->name}}" class="form-control" id="Name" placeholder="Enter Name">
                     </div>
                     <div class="form-group">
                         <label>Select Parent Category</label>
-                        <select class="form-control" name="parent">
-                          <option value="0">Select Parent Category</option>
-                          @foreach ($categories as $category)
-                          <option value="{{$category->id}}" @if ($result->parent && $result->parent->id==$category->id)
-                              selected
-                          @endif>{{$category->name}}</option>
-                          @endforeach
-                        </select>
+                      <input disabled type="text" value="{{$result->parent->name ?? ''}}" name="name" class="form-control" id="Name" placeholder="Enter Name" >
                       </div>
                   <!-- /.card-body -->
-  
                   <div class="card-footer">
-                    <button  type="submit" name="save" class="btn btn-primary btn-flat">Save</button>
-                    <button type="submit" name="saveclose"class="btn btn-success btn-flat">Save & Close</button>
+                    <a href="{{route('admin.category.edit',$result->id)}}" class="btn btn-outline-primary btn-flat">Edit</a>
                     <a href="{{route('admin.category.index')}}" class="btn btn-outline-primary btn-flat">Close</a>
                   </div>
-                </form>
               </div>
         </div>
     </div>

@@ -57,12 +57,19 @@
                         <td>{{$category->name}}</td>
                         <td><span class="badge badge-info">0</span></td>
                         <td><div class="btn-group">
-                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>
-                            
+                            <a href="{{route('admin.category.show',$category->id)}}" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
+                            <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></a> 
                           </div></td>
                           <td>
-                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                            <form action="{{route('admin.category.destroy',$category->id)}}" method="post">
+                              {{csrf_field()}}
+                              {{method_field('DELETE')}}
+                            <button type="submit" class="btn btn-outline-success btn-flat" onclick='if(!confirm(" Are sure you to destroy it"))
+                            {
+                             event.preventDefault(); 
+                            }'>
+                            <i class="fas fa-trash"></i></button>
+                            </form>
                           </td>
                       </tr>  
                       @foreach ($category->childs as $key1=>$child)
@@ -71,12 +78,19 @@
                         <td>{{$child->name}}</td>
                         <td><span class="badge badge-info">0</span></td>
                         <td><div class="btn-group">
-                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
-                            <button type="button" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>
-                            
+                            <a href="{{route('admin.category.show',$child->id)}}" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
+                            <a href="{{route('admin.category.edit',$child->id)}}" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></a>
                           </div></td>
                           <td>
-                            <button type="button" class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                            <form action="{{route('admin.category.destroy',$child->id)}}" method="post">
+                              {{csrf_field()}}
+                              {{method_field('DELETE')}}
+                            <button type="submit" class="btn btn-outline-success btn-flat" onclick='if(!confirm(" Are sure you to destroy it"))
+                            {
+                             event.preventDefault(); 
+                            }'>
+                            <i class="fas fa-trash"></i></button>
+                            </form>
                           </td>
                       </tr>
                       @endforeach
