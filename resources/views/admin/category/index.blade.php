@@ -20,14 +20,14 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-sm-12">
-                <a href="{{route('admin.category.create')}}" class="btn btn-block btn-primary btn-flat"><i class="fas fa-plus"></i> Create</a>
+                <a href="{{route('admin.category.create')}}" type='button' class="btn btn-primary btn-flat"><i class="fas fa-plus"></i> Create</a>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Responsive Hover Table</h3>
+                      <h3 class="card-title">Data </h3>
       
                       <div class="card-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -45,7 +45,6 @@
                         <thead>
                           <tr>
                             <th>ID</th>
-                            <th>Parent Name</th>
                             <th>Name</th>
                             <th>Posts</th>
                             <th>Action</th>
@@ -53,21 +52,38 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>Business</td>
-                            <td>Business News</td>
-                            <td>286</td>
-                            <td>
-                                <div class="btn-group">
-                                  <button class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
-                                  <button class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>    
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
-                            </td>
-                          </tr>
+                      @foreach ($categories as $key=>$category)
+                      <tr>
+                        <td class="">{{$key+1}}</td>
+                        <td>{{$category->name}}</td>
+                        <td>0</td>
+                        <td>
+                            <div class="btn-group">
+                              <button class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
+                              <button class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>    
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                        </td>
+                      </tr>
+                      @foreach ($category->childs as $keyc=>$child)
+                      <tr>
+                      <td class="table-border-left">{{$keyc+1}}</td>
+                      <td>{{$child->name}}</td>
+                      <td>0</td>
+                      <td>
+                          <div class="btn-group">
+                            <button class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>    
+                          </div>
+                      </td>
+                      <td>
+                          <button class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                      </td>
+                    </tr>
+                      @endforeach
+                      @endforeach
                         </tbody>
                       </table>
                     </div>
