@@ -38,14 +38,14 @@
                       <div class="card-body">
                         <div class="form-group">
                           <label for="Name">Name</label>
-                          <input type="text" name="name" value="{{$request->name}}" class="form-control" id="Name" placeholder="Enter Name">
+                          <input type="text" disabled name="name" value="{{$request->name}}" class="form-control" id="Name" placeholder="Enter Name">
                         </div>
                         <div class="form-group">
                           <label>Parent Name</label>
-                          <select name="parent" class="form-control">
+                          <select disabled name="parent" class="form-control">
                             <option value="0">Select Parent Name</option>
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}" @if($request->parent && $request->parent->id==$category->id)
+                            <option  value="{{$category->id}}" @if($request->parent && $request->parent->id==$category->id)
                               selected
                             @endif>{{$category->name}}</option>
                         @endforeach
@@ -55,8 +55,6 @@
                         
       
                       <div class="card-footer">
-                        <button type="submit" name='save' class="btn btn-outline-danger">Save</button>
-                        <button type="submit" name='saveclose' class="btn btn-outline-primary">Save & close</button>
                         <a href="{{route('admin.category.index')}}" class="btn btn-outline-danger">Close</a>
                       </div>
                     </form>

@@ -59,8 +59,8 @@
                         <td>0</td>
                         <td>
                             <div class="btn-group">
-                              <button class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
-                              <button class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>    
+                              <a href="{{route('admin.category.show',$category->id)}}" class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
+                              <a href="{{route('admin.category.edit',$category->id)}}" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></a>  
                             </div>
                         </td>
                         <td>
@@ -75,11 +75,17 @@
                       <td>
                           <div class="btn-group">
                             <button class="btn btn-outline-info btn-flat"><i class="fas fa-eye"></i></button>
-                            <button class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></button>    
+                            <a href="{{route('admin.category.edit',$child->id)}}" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></a>    
                           </div>
                       </td>
                       <td>
-                          <button class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                          <form action="{{route('admin.category.destroy',$child->id)}} " method="post">
+                           {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button type="submit" onclick='if(!confirm("Are you going to delete it")){
+                              event.preventDefault();
+                            }' class="btn btn-outline-success btn-flat"><i class="fas fa-trash"></i></button>
+                          </form>
                       </td>
                     </tr>
                       @endforeach
