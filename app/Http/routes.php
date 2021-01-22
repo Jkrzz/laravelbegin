@@ -14,4 +14,5 @@
 Route::group(['prefix' => 'admin','namespace' => 'admin'], function () {
     Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
     Route::resource('/category', 'CategoryController');
+    Route::resource('/posts', 'PostController');
 });

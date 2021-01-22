@@ -10,7 +10,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('admin.category.index')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{route('admin.posts.index')}}">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
           </div><!-- /.col -->
@@ -28,7 +28,7 @@
             <div class="col-sm-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                      <h3 class="card-title">Create Category</h3>
+                      <h3 class="card-title">Create Post</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -36,24 +36,32 @@
                       {{csrf_field()}}
                       <div class="card-body">
                         <div class="form-group">
-                          <label for="Name">Name</label>
-                          <input type="text" name="name" class="form-control" id="Name" placeholder="Enter Name">
+                          <label for="image">Image</label>
+                          <input type="file" name="image" class="form-control" id="image" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                          <label for="Name">Title</label>
+                          <input type="text" name="title" class="form-control" id="Name" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                          <label for="description">Description</label>
+                         <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
                         </div>
                         <div class="form-group">
                           <label>Category Name</label>
                           <select name="category" class="form-control">
-                            <option disabled value="0">Select Parent Name</option>
-                        @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
+                            <option value="0">Select Category</option>
+                              @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                              @endforeach
                           </select>
-                    </div>
+                        </div>
                       </div>
                       <!-- /.card-body -->
                       <div class="card-footer">
                         <button type="submit" name='save' class="btn btn-outline-danger">Save</button>
                         <button type="submit" name='saveclose' class="btn btn-outline-primary">Save & close</button>
-                        <a href="{{route('admin.category.index')}}" class="btn btn-outline-danger">Close</a>
+                        <a href="{{route('admin.posts.index')}}" class="btn btn-outline-danger">Close</a>
                       </div>
                     </form>
                   </div>
