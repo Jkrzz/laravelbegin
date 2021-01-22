@@ -44,6 +44,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('admin.posts.index')}}" class="nav-link {{Request::segment(2)=='posts' ? 'active':''}}">
+              <i class="nav-icon fab fa-elementor"></i>
+              <p>
+                Post
+              </p>
+            </a>
+          </li>
           
         </ul>
       </nav>
