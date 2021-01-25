@@ -1,3 +1,9 @@
 .table-border-left {
   border-left: 1rem solid blue;
 }
+.description-table-fixed {
+  display: inline-block;
+  width: 200px;
+  height: 52px;
+  overflow: hidden;
+}

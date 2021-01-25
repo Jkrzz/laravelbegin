@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}"  class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
@@ -24,7 +24,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('admin.dashboard')}}" class="nav-link">
+            <a href="{{route('admin.dashboard')}}"  class="nav-link {{Request::segment(2)=='dashboard'?'active':''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -32,7 +32,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.category.index')}}" class="nav-link">
+            <a href="{{route('admin.category.index')}}" class="nav-link {{Request::segment(2)=='category'?'active':''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
              Category
@@ -41,7 +41,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('admin.posts.index')}}" class="nav-link">
+            <a href="{{route('admin.posts.index')}}" class="nav-link {{Request::segment(2)=='posts' ? 'active':''}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
              Post

@@ -12,4 +12,7 @@ class Category extends Model
     public function childs(){
         return $this->hasMany(Category::class,'parent_id');
     }
+    public function category(){
+        return $this->hasMany(Post::class,'id');
+      }
 }

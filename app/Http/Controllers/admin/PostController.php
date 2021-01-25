@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\admin\Category;
+use App\admin\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-    return view('admin.posts.index');
+        $posts=Post::all();
+        return view('admin.posts.index',compact('posts'));
     }
 
     /**
@@ -28,6 +30,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        
         return view('admin.posts.create',compact('categories'));
     }
 
@@ -38,8 +41,23 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $posts=new Post();
+        $posts->title = $request->title;
+        $posts->description = $request->description;
+        $file=$request->file('image');
+        $name=$file->getClientOriginalName();
+        $file->move('images',$name);
+        $posts->image=$name;
+        $posts->category_id = $request->category;
+        $posts->slug =$request->title;
+        $posts->save();
+        if(isset($request->save)){
+            return redirect()->route('admin.posts.edit',$posts->id);
+            }
+            else{
+                return redirect()->route('admin.posts.index');
+            }
     }
 
     /**
@@ -50,7 +68,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $categories=Category::all();
+        $request=Post::find($id);
+        return view('admin.posts.show' ,compact('request','categories'));
     }
 
     /**
@@ -61,7 +81,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories=Category::all();
+        $request=Post::find($id);
+        return view('admin.posts.edit' ,compact('request','categories'));
     }
 
     /**
@@ -73,7 +95,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $posts=Post::find($id);
+        $posts->title = $request->title;
+        $posts->description = $request->description;
+        $file=$request->file('image');
+        $name=$file->getClientOriginalName();
+        $file->move('images',$name);
+        $posts->image=$name;
+        $posts->category_id = $request->category;
+        $posts->slug =$request->title;
+        $posts->save();
+        if(isset($request->save)){
+            return redirect()->route('admin.posts.edit',$posts->id);
+            }
+            else{
+                return redirect()->route('admin.posts.index');
+            }
     }
 
     /**
@@ -84,6 +121,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
