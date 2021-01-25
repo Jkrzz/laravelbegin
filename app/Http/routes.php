@@ -11,8 +11,11 @@
 |
 */
 
-Route::group(['prefix' => 'admin','namespace' => 'admin'], function () {
+Route::group(['prefix' => 'admin','namespace' => 'admin','middleware' => 'auth'], function () {
     Route::get('/dashboard','DashboardController@index')->name('admin.dashboard');
     Route::resource('/category', 'CategoryController');
     Route::resource('/posts', 'PostController');
 });
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

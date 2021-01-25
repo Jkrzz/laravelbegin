@@ -99,8 +99,13 @@ class PostController extends Controller
         $posts->title = $request->title;
         $posts->description = $request->description;
         $file=$request->file('image');
-        $name=$file->getClientOriginalName();
-        $file->move('images',$name);
+        if($file){
+            $name=$file->getClientOriginalName();
+            $file->move('images',$name);
+        }
+        else{
+            $name=$post->image;
+        }
         $posts->image=$name;
         $posts->category_id = $request->category;
         $posts->slug =$request->title;
