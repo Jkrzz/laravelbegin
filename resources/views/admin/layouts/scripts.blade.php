@@ -27,7 +27,8 @@
 <script>
   $(function () {
     // Summernote
-    $('#description').summernote()
+    $('#description').summernote();
+    $('#description-disable').summernote('disable');
   })
 </script>
 <!-- overlayScrollbars -->

@@ -44,13 +44,35 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Posts</th>
+                        <th>Title</th>
+                        <th>Category</th>
                         <th>Actions</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($posts as$key=>$post)
+                        <tr>
+                          <th>{{$key+1}}</th>
+                          <th>{{$post->title}}</th>
+                          <th>{{$post->category->name}}</th>
+                          <td><div class="btn-group">
+                            <a href="{{route('admin.posts.show',$post->id)}}" class="btn btn-outline-success btn-flat"><i class="fas fa-eye"></i></button>
+                            <a href="{{route('admin.posts.edit',$post->id)}}" class="btn btn-outline-info btn-flat"><i class="far fa-edit"></i></a> 
+                          </div></td>
+                          <td>
+                            <form action="{{route('admin.posts.destroy',$post->id)}}" method="post">
+                              {{csrf_field()}}
+                              {{method_field('DELETE')}}
+                            <button type="submit" class="btn btn-outline-success btn-flat" onclick='if(!confirm(" Are sure you to destroy it"))
+                            {
+                             event.preventDefault(); 
+                            }'>
+                            <i class="fas fa-trash"></i></button>
+                            </form>
+                          </td>
+                        </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>

@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -54,6 +55,14 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+    public function showRegistrationForm()
+    {
+        if(Auth::user()){
+            return view('auth.register');
+        }else{
+            return redirect(route('user.index'));
+        }
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -69,4 +78,5 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    
 }

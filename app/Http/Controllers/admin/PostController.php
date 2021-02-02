@@ -17,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-    return view('admin.posts.index');
+    $posts=Post::all();
+    return view('admin.posts.index',compact('posts'));
     }
 
     /**
@@ -55,7 +56,6 @@ class PostController extends Controller
             else{
                 return redirect()->route('admin.posts.index');
             }
-        
     }
 
     /**
@@ -65,8 +65,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $categories=Category::all();
+        $post=Post::find($id);
+        return view('admin.posts.show',compact('post','categories'));
     }
 
     /**
@@ -76,8 +78,10 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $post=Post::find($id);
+        $categories=Category::all();
+        return view('admin.posts.edit',compact('categories','post'));
     }
 
     /**
@@ -89,7 +93,27 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post=Post::find($id);
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $file=$request->file('image');
+        if($file){
+            $name=$file->getClientOriginalName();
+            $file->move('images',$name);
+        }
+        else{
+            $name=$post->image;
+        }
+        $post->image=$name;
+        $post->category_id=$request->category;
+        $post->slug=$request->title;
+        $post->save();
+        if(isset($request->save)){
+            return redirect()->route('admin.posts.edit',$post->id);
+            }
+            else{
+                return redirect()->route('admin.posts.index');
+            }
     }
 
     /**
@@ -100,6 +124,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::find($id)->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
